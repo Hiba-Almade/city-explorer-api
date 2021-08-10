@@ -11,8 +11,8 @@ const PORT=process.env.PORT;
 
 class Forecast{
     constructor(obj){
-        this.data=obj.valid_date
-        this.description=obj.weather.description
+        this.date=`Date: ${obj.valid_date}`
+        this.description=`Description: Low of ${obj.low_temp}, high of ${obj.max_temp} with few ${obj.weather.description}`
 
     }
 
@@ -28,7 +28,8 @@ app.get('/', // our endpoint name
 //localhost:3000/weather?cityname=<..>&lat=<..>&lon=<..>
 app.get('/weather', 
  function (req, res) { 
-    let cityValue= req.query.cityname;
+    try{
+     let cityValue= req.query.cityname;
     let latValue = req.query.lat;
     let lonValue = req.query.lon;
     let searchQuery=weatherData.find(element =>{
@@ -38,7 +39,6 @@ app.get('/weather',
            
         }
     })
-    try{
         let forecaseArr = searchQuery.data.map(element =>{
             return new Forecast(element)
         })
