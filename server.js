@@ -25,15 +25,15 @@ app.get('/', // our endpoint name
   res.send('Hello World') // our endpoint function response
 })
 
-//localhost:3000/weather?cityname=<..>&lat=<..>&lon=<..>
+//localhost:3001/weather?cityname=<..>&lat=<..>&lon=<..>
 app.get('/weather', 
  function (req, res) { 
     try{
      let cityValue= req.query.cityname;
-    let latValue = req.query.lat;
-    let lonValue = req.query.lon;
+    let latValue = Number(req.query.lat);
+    let lonValue = Number(req.query.lon);
     let searchQuery=weatherData.find(element =>{
-        if(element.city_name.toLowerCase() == cityValue.toLowerCase() && element.lat == latValue && element.lon == lonValue){
+        if(element.city_name.toLowerCase() == cityValue.toLowerCase() || element.lat == latValue || element.lon == lonValue){
             console.log(1)
             return element;
            
