@@ -1,4 +1,5 @@
 const Movie = require('../models/Movie.model')
+const axios=require('axios');
 let movie = (req, res) => { 
     try{
     let cityname=req.query.cityname
